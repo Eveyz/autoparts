@@ -1,0 +1,43 @@
+{
+  "name": "autoparts",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "nedb": "^1.8.0"
+  },
+  "main": "main.js",
+  "productName": "autoparts",
+  "homepage": "./",
+  "scripts": {
+    "start": "react-scripts start",
+    "build-react": "react-scripts build",
+    "build": "electron-packager . Autoparts --overwrite --platform=win32 --arch=ia32 --prune=true --asar",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "electron-dev": "set ELECTRON_START_URL=http://localhost:3000 && electron ."
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "bcrypt": "^3.0.4",
+    "bcrypt-nodejs": "^0.0.3",
+    "cross-env": "^5.2.0",
+    "electron": "^4.2.4",
+    "electron-packager": "^13.1.1",
+    "formik": "^1.5.1",
+    "materialize-css": "^1.0.0-rc.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.8",
+    "yup": "^0.26.10"
+  }
+}

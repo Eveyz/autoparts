@@ -1,0 +1,127 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.flash-msg {
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 8px 0px;
+}
+
+.flash-msg span {
+  padding: 10px 0px;
+  font-weight: bold;
+}
+
+.error-msg {
+  background-color: #e74c3c;
+}
+
+.warning-msg {
+  background-color: #f39c12;
+}
+
+.success-msg {
+  background-color: #2ecc71;
+}
+
+.required {
+  color: red;
+}
+
+.brand-list-font {
+  font-size: 50px !important;
+  font-weight: bold;
+}
+
+.car-brand-logo {
+  min-height: 220px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.modal-title-font {
+  color: #141c3a;
+  font-weight: 500;
+  font-family: Regular Patch,Regular Bold,Nunito Sans,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+}
+
+.cart-td-padding td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.cart-td-padding-readOnly {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.order-info {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 17px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable td {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  font-family: Roboto,Arial,sans-serif;
+}
+
+.clickable:hover {
+  background-color: #e6f4ea;
+}
+
+.small-td-padding td {
+  padding: 8px 5px;
+}
+
+.airbnb-red {
+  background-color: #FF5B5F;
+}
