@@ -5,7 +5,7 @@ import Loading from '../layouts/Loading'
 import CompanyList from './CompanyList'
 import CompanyForm from './CompanyForm'
 import PaginationContainer from '../layouts/PaginationContainer'
-import { findCompanies, createCompany, updateCompany, paginateCompanies, countCompanies } from './company_actions'
+import { createCompany, updateCompany, paginateCompanies, countCompanies } from './company_actions'
 
 class CompanyListContainer extends React.Component {
   constructor(props) {

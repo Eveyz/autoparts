@@ -3,7 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "nedb": "^1.8.0"
+    "@nivo/bar": "^0.62.0",
+    "@nivo/pie": "^0.62.0",
+    "chart.js": "^2.9.3",
+    "nedb": "^1.8.0",
+    "nivo": "^0.31.0",
+    "priorityqueuejs": "^2.0.0",
+    "react-chartjs-2": "^2.9.0",
+    "recharts": "^1.8.5"
   },
   "main": "main.js",
   "productName": "autoparts",

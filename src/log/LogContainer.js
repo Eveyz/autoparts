@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import LogList from './LogList'
-import { findLogs, countLogs, paginateLogs } from '../log/log_actions'
+import { countLogs, paginateLogs } from '../log/log_actions'
 import Header from '../layouts/Header'
 import PaginationContainer from '../layouts/PaginationContainer'
 import Loading from '../layouts/Loading'

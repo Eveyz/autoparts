@@ -42,6 +42,7 @@ class Header extends React.Component {
           <ul className="right hide-on-med-and-down">
             <li><Link to="/brands" replace className="bold">厂商列表</Link></li>
             <li><Link to="/orders" replace className="bold">所有订单</Link></li>
+            <li><Link to="/profit" replace className="bold">统计</Link></li>
             <li><Link to="/companies" replace className="bold">购货单位管理</Link></li>
             <li><Link to="/logs" replace className="bold">进出库记录</Link></li>
             <li>

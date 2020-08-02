@@ -7,11 +7,10 @@ import PartList from './PartList'
 import PartInputForm from './PartInputForm'
 import { SERACH_PARTS } from '../constants'
 import Loading from '../layouts/Loading'
-import { countParts, paginateParts, findPart, findParts, createPart, updatePart, removePart, updatePartStorage } from './part_actions'
+import { countParts, paginateParts, findPart, createPart, updatePart, removePart, updatePartStorage } from './part_actions'
 import { createLog, updateLog, removeLog } from '../log/log_actions'
 import { getToday } from '../utils'
 import PaginationContainer from '../layouts/PaginationContainer'
-import { paginateOrders } from '../order/order_actions'
 
 const { ipcRenderer } = window.require("electron")
 

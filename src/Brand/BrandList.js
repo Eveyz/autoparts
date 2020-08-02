@@ -17,7 +17,7 @@ class BrandList extends React.Component {
           <div className="row">
             <Link to="/brands/toyota">
               <div className="col m6 s12">
-                <div className="card horizontal car-brand-logo">
+                <div className="card horizontal car-brand-logo" style={{minHeight: "320px"}}>
                   <div className="card-image">
                     <img src={Toyota} alt="toyota-logo" />
                   </div>
@@ -31,7 +31,7 @@ class BrandList extends React.Component {
             </Link>
             <Link to="/brands/nissan">
               <div className="col m6 s12">
-                <div className="card horizontal car-brand-logo">
+                <div className="card horizontal car-brand-logo" style={{minHeight: "320px"}}>
                   <div className="card-image">
                     <img src={Nissan} alt="nissan-logo" />
                   </div>
@@ -47,7 +47,7 @@ class BrandList extends React.Component {
           <div className="row">
             <Link to="/brands/mitsubishi">
               <div className="col m6 s12">
-                <div className="card horizontal car-brand-logo">
+                <div className="card horizontal car-brand-logo" style={{minHeight: "320px"}}>
                   <div className="card-image">
                     <img src={Mit} alt="mitsubishi-logo" />
                   </div>
@@ -61,7 +61,7 @@ class BrandList extends React.Component {
             </Link>
             <Link to="/brands/honda">
               <div className="col m6 s12">
-                <div className="card horizontal car-brand-logo">
+                <div className="card horizontal car-brand-logo" style={{minHeight: "320px"}}>
                   <div className="card-image">
                     <img src={Honda} alt="honda-logo" />
                   </div>

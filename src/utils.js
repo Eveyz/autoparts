@@ -33,6 +33,67 @@ export const groupBy = (list, keyGetter) => {
   return map
 }
 
+export const stats = (list) => {
+  // profit: { 2020: { 1: 234, 2: 456 } }
+  var profit = {},
+      parts = {},
+      orders = {},
+      brands = {}
+  list.forEach((item) => {
+    var d1 = new Date(item.time),
+        m = d1.getMonth() + 1,
+        y = d1.getFullYear();
+
+    // profit
+    if(profit[y]) {
+      if(profit[y][m]) profit[y][m] = profit[y][m] + item.profit
+      else profit[y][m] = item.profit
+    } else {
+      profit[y] = {}
+      profit[y][m] = item.profit
+    }
+
+    // orders
+    let current_year = new Date().getFullYear()
+    orders[y] ? orders[y] = orders[y] + 1 : orders[y] = 1
+    // end orders
+
+    if(item.parts && item.parts.length > 0) {
+      item.parts.forEach((p, idx) => {
+        // brands
+        if(brands[y]) {
+          if(brands[y][brandChinese[p.brand]]) brands[y][brandChinese[p.brand]] = brands[y][brandChinese[p.brand]] + 1
+          else brands[y][brandChinese[p.brand]] = 1
+        } else {
+          brands[y] = {}
+          brands[y][brandChinese[p.brand]] = 1
+        }
+      })
+    }
+  })
+  return {
+    "_profit": profit,
+    "_parts": parts,
+    "_orders": orders,
+    "_brands": brands,
+  }
+}
+
+export const groupByYear = (list) => {
+  const map = new Map()
+  list.forEach((item) => {
+    const keys = item.date.split(".")
+    const key = `${keys[0]}}`
+    const collection = map.get(key)
+    if (!collection) {
+      map.set(key, [item])
+    } else {
+      collection.push(item)
+    }
+  })
+  return map
+}
+
 export const groupByMonth = (list) => {
   const map = new Map()
   list.forEach((item) => {
