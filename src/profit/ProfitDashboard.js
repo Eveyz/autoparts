@@ -7,37 +7,22 @@ import { ResponsiveBar } from '@nivo/bar'
 import { ResponsivePie } from '@nivo/pie'
 import M from 'materialize-css'
 
-const ss = [
-  {
-    "id": "sass",
-    "label": "sass",
-    "value": 162,
-    "color": "hsl(237, 70%, 50%)"
-  },
-  {
-    "id": "make",
-    "label": "make",
-    "value": 314,
-    "color": "hsl(135, 70%, 50%)"
-  },
-]
-
 const ProfitDashboard = (props) => {
 
   const [profit, setProfit] = useState(null)
   const [brands, setBrands] = useState(null)
+  const [parts, setParts] = useState(null)
   const [year, setYear] = useState(null)
   const [years, setYears] = useState([])
   const [loading, setLoading] = useState(true)
+  const [tableContent, setTable] = useState("")
 
   useEffect(() => {
     M.AutoInit()
     findOrders({}, (err, orders) => {
-      console.log(orders[0])
       // console.log(orders.length)
       let { _profit, _parts, _orders, _brands } = stats(orders)
       let _years = Object.keys(_profit).sort((a, b) => { return b - a })
-
       // profit
       let data = {}
       _years.forEach(y => {
@@ -65,6 +50,8 @@ const ProfitDashboard = (props) => {
       })
       setBrands(brands_data)
 
+      setParts(_parts)
+
       setYear(_years[0])
       setYears(_years)
       setLoading(false)
@@ -74,6 +61,48 @@ const ProfitDashboard = (props) => {
   useEffect(() => {
     M.AutoInit()
   })
+
+  useEffect(() => {
+    if(years.length > 0) {
+      var q = parts[year]
+      var trs = q._elements.map((p, idx) => {
+        return (
+          <tr key={idx}>
+            <td>{p.cnt}</td>
+            <td>{p.part.number}</td>
+            <td>{p.part.order}</td>
+            <td>{p.part.name}</td>
+            <td>{p.part.carType}</td>
+            <td>{p.part.unit}</td>
+            <td>{p.part.quantity}</td>
+            <td>{p.part.importPrice ? p.part.importPrice.toFixed(2) : p.part.importPrice}</td>
+            <td>{p.part.salePrice ? p.part.salePrice.toFixed(2) : p.part.salePrice}</td>
+          </tr>
+        )
+      })
+      var parts_conent =
+      <table>
+        <thead>
+          <tr>
+            <th>销量</th>
+            <th>库次</th>
+            <th>编号</th>
+            <th>配件名</th>
+            <th>车型</th>
+            <th>量位</th>
+            <th>数量</th>
+            <th>进货价(元)</th>
+            <th>默认售价(元)</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          {trs}
+        </tbody>
+      </table>
+      setTable(parts_conent)
+    }
+  }, [years, year])
 
   const selectYear = (e) => {
     setYear(e.target.value)
@@ -266,6 +295,10 @@ const ProfitDashboard = (props) => {
               ]}
           />
           </div>
+          <br/>
+          <h4>卖的最好的10件配件</h4>
+          {tableContent}
+          <br/>
       </div>
       }
     </div>

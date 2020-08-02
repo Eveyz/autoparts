@@ -104,7 +104,7 @@ const OrderEdit = (props) => {
           :
           <div>
             <br/>
-            <Link to={`/orders/${props.match.params._id}`} className="btn white black-text">返回</Link>
+            <Link to={`/orders`} className="btn white black-text">返回所有订单列表</Link>
             <h4>编辑订单</h4>
             <table>
               <thead>
@@ -126,6 +126,7 @@ const OrderEdit = (props) => {
             </table>
             <br/>
             <button type="button" className="btn btn-large" onClick={save}>保存</button>
+            <Link to={`/orders/${props.match.params._id}`} className="btn btn-large right white black-text">返回</Link>
           </div>
         }
       </div>

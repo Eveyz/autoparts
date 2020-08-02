@@ -126,6 +126,7 @@ class LoginForm extends React.Component {
                                       onBlur={handleBlur}
                                       onFocus={this.removeMsg}
                                       className="validate"
+                                      autoFocus={true}
                                     />
                                     <label htmlFor="username">账号 <span className="required">*</span></label>
                                   </div>

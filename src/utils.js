@@ -1,3 +1,5 @@
+var PriorityQueue = require('priorityqueuejs')
+
 export const brandChinese = {
   "toyota": "丰田",
   "nissan": "日产",
@@ -54,7 +56,7 @@ export const stats = (list) => {
     }
 
     // orders
-    let current_year = new Date().getFullYear()
+    // let current_year = new Date().getFullYear()
     orders[y] ? orders[y] = orders[y] + 1 : orders[y] = 1
     // end orders
 
@@ -68,8 +70,31 @@ export const stats = (list) => {
           brands[y] = {}
           brands[y][brandChinese[p.brand]] = 1
         }
+
+        // parts
+        if(parts[y]) {
+          if(parts[y][p._id]) parts[y][p._id]["cnt"] = parts[y][p._id]["cnt"] + 1
+          else parts[y][p._id] = { "cnt": 1, part: p }
+        } else {
+          parts[y] = {}
+          parts[y][p._id] = { "cnt": 1, part: p }
+        }
+        
+        
       })
     }
+  })
+  Object.keys(parts).forEach(year => {
+    var queue = new PriorityQueue((a, b) => {
+      return b.cnt - a.cnt
+    })
+    for (const id in parts[year]) {
+      queue.enq(parts[year][id])
+      if(queue.size() > 10) {
+        queue.deq()
+      }
+    }
+    parts[year] = queue
   })
   return {
     "_profit": profit,

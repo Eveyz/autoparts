@@ -266,7 +266,8 @@ class Order extends React.Component {
                   <br/>
                   <h5>利润: <span className={order.profit > 0 ? "green-text" : "red-text"}>{order.profit ? order.profit.toFixed(2) : 0}</span>元</h5>
                   <button className="btn btn-large" onClick={this.print}>打印订单</button>
-                  <button className="btn btn-large blue" style={{marginLeft: "15px"}} disabled={cancelled} onClick={this.modify}>修改订单</button>
+                  {/* <button className="btn btn-large blue" style={{marginLeft: "15px"}} disabled={cancelled} onClick={this.modify}>修改订单</button> */}
+                  <Link to={`/orders/${this.props.match.params._id}/edit`} style={{marginLeft: "15px"}} disabled={cancelled} className="btn btn-large blue">编辑订单</Link>
                   {
                     order.paid ?
                     <button className="btn btn-large blue" style={{marginLeft: "15px"}} disabled={true}><span className="green-text">&#10004; 已付清</span></button>

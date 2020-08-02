@@ -12,6 +12,7 @@ import OrderPrint from './order/OrderPrint'
 import CompanyListContainer from './company/CompanyListContainer'
 import CompanyContainer from './company/CompanyContainer'
 import ProfitDashboard from './profit/ProfitDashboard'
+import OrderEdit from './order/OrderEdit'
 
 class Routes extends Component {
   render() {
@@ -26,6 +27,7 @@ class Routes extends Component {
         <Route exact path="/orders" render={(props) => <OrderListContainer {...props} />} />
         <Route exact path="/orders/:_id/print" render={(props) => <OrderPrint {...props} />} />
         <Route exact path="/orders/:_id" render={(props) => <Order {...props} />} />
+        <Route exact path="/orders/:_id/edit" render={(props) => <OrderEdit {...props} />} />
         <Route exact path="/brands" component={BrandList} />
         <Route exact path="/brands/toyota" render={(props) => <PartListContainer {...props} brand="toyota" />} />
         <Route exact path="/brands/nissan" render={(props) => <PartListContainer {...props} brand="nissan" />} />
