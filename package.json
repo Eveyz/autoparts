@@ -37,7 +37,7 @@
     "bcrypt": "^3.0.4",
     "bcrypt-nodejs": "^0.0.3",
     "cross-env": "^5.2.0",
-    "electron": "^4.2.4",
+    "electron": "^9.1.2",
     "electron-packager": "^13.1.1",
     "formik": "^1.5.1",
     "materialize-css": "^1.0.0-rc.2",
