@@ -95,7 +95,8 @@ class PartListContainer extends React.Component {
           this.setState({
             count: count,
             isLoading: false,
-            parts: parts
+            parts: parts,
+            mode: "VIEW"
           })
         })
       })
@@ -291,6 +292,7 @@ class PartListContainer extends React.Component {
         part={part} 
         mode={mode} 
         brand={this.props.brand} 
+        history={this.props.history}
       />
     </div>
     

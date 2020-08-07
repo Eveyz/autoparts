@@ -172,7 +172,7 @@ ipcMain.on(EMPTY_CART, (event, arg) => {
 })
 
 ipcMain.on("printPDF", (event, content) => {
-  workerWindow.webContents.send("printPDF", content);
+  workerWindow.webContents.send("printPDF", content)
   event.returnValue = null
 });
 
@@ -181,6 +181,10 @@ ipcMain.on("readyToPrintPDF", (event) => {
   const pdfPath = path.join(os.tmpdir(), 'print.pdf');
   // Use default printing options
   workerWindow.webContents.print()
+  // const options = { silent: true }
+  // workerWindow.webContents.print(options, (success, errorType) => {
+  //   if (!success) console.log(errorType)
+  // })
   // workerWindow.webContents.printToPDF({}, function (error, data) {
   //   if (error) throw error
   //   fs.writeFile(pdfPath, data, function (error) {

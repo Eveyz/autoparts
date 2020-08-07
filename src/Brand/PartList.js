@@ -1,4 +1,5 @@
 import React from 'react'
+import M from 'materialize-css'
 
 import PartNumberModal from './PartNumberModal'
 import AddPartNumberModal from './AddPartNumberModal'
@@ -43,6 +44,7 @@ class PartList extends React.Component {
   }
 
   addToCart = (part) => (e) => {
+    M.AutoInit()
     this.modalTrigger.current.click()
     this.setState((prevState, props) => ({
       part: part

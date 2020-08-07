@@ -45,6 +45,9 @@ export const stats = (list) => {
     var d1 = new Date(item.time),
         m = d1.getMonth() + 1,
         y = d1.getFullYear();
+    // let times = item.date.split(".")
+    // let y = times[0]
+    // let m = times[1]
 
     // profit
     if(profit[y]) {

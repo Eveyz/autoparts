@@ -212,7 +212,7 @@ class PartListPagination extends React.Component {
       <div className="col m10 offset-m1 s12">
         <div>
           <div className="col s12 no-padding">
-            <Link to={`/brands`} style={breadCrumbFont}><b>所有车厂</b></Link> > 
+            <Link to={`/brands`} style={breadCrumbFont}><b>所有车厂</b></Link> &#62; 
             <span style={breadCrumbFont}> {_brand}</span>
           </div>
         </div>
