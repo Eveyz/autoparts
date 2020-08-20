@@ -31,7 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "bcrypt-nodejs": "^0.0.3",
     "cross-env": "^5.2.0",
     "electron": "^4.2.4",
