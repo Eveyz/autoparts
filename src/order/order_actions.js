@@ -4,9 +4,13 @@ const db = remote.getGlobal('db')
 export const findOrders = (query, callback) => {
   db.orders.find(query, (err, orders) => {
     if(err) console.log(err)
-    callback(err, orders.sort((a, b) => {
-      return b.time - a.time
-    }))
+    if(orders.length > 0) {
+      callback(err, orders.sort((a, b) => {
+        return b.time - a.time
+      }))
+    } else {
+      callback(err, orders)
+    }
   })
 }
 

@@ -77,7 +77,7 @@ class PartList extends React.Component {
                 <div className="col s12 m12">
                   <div className="card">
                     <div className="card-content black-text">
-                      <h4 className="center">当前没有{_brand}配件</h4>
+                      <h4 className="center">没有找到{_brand}配件</h4>
                     </div>
                   </div>
                 </div>

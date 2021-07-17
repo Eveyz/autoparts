@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcryptjs');
 const { remote } = window.require("electron")
 const db = remote.getGlobal('db')
 

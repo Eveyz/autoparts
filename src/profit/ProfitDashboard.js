@@ -13,47 +13,55 @@ const ProfitDashboard = (props) => {
   const [brands, setBrands] = useState(null)
   const [parts, setParts] = useState(null)
   const [year, setYear] = useState(null)
-  const [years, setYears] = useState([])
+  const [years, setYears] = useState(() => {
+    let _years = []
+    let _year = new Date().getFullYear()
+    while(_year >= 2019) {
+      _years.push(_year)
+      _year -= 1
+    }
+    return _years
+  })
   const [loading, setLoading] = useState(true)
   const [tableContent, setTable] = useState("")
 
   useEffect(() => {
     M.AutoInit()
-    findOrders({}, (err, orders) => {
-      // console.log(orders.length)
-      let { _profit, _parts, _orders, _brands } = stats(orders)
-      let _years = Object.keys(_profit).sort((a, b) => { return b - a })
+    var init_year = new Date().getFullYear()
+    findOrders({'date': { $gt: `${init_year}` }}, (err, orders) => {
+      // let { _profit, _parts, _orders, _brands } = stats(orders)
+      let { _profit } = stats(orders)
       // profit
       let data = {}
-      _years.forEach(y => {
-        let months = Object.keys(_profit[y])
-        data[y] = months.map(m => {
-          return {
-            "月份": `${m}月份`,
-            "利润": _profit[y][m],
-          }
-        })
+      let months = Object.keys(_profit[init_year])
+      let year_sum = 0
+      data[init_year] = months.map(m => {
+        year_sum += _profit[init_year][m]
+        return {
+          "月份": `${m}月份`,
+          "利润": _profit[init_year][m],
+        }
       })
+      data['sum'] = year_sum
       setProfit(data)
 
       // brand
-      let brands_data = {}
-      _years.forEach(y => {
-        let brands = Object.keys(_brands[y])
-        brands_data[y] = brands.map(b => {
-          return {
-            "id": b,
-            "label": b,
-            "value": _brands[y][b],
-          }
-        })
-      })
-      setBrands(brands_data)
+      // let brands_data = {}
+      // _years.forEach(y => {
+      //   let brands = Object.keys(_brands[y])
+      //   brands_data[y] = brands.map(b => {
+      //     return {
+      //       "id": b,
+      //       "label": b,
+      //       "value": _brands[y][b],
+      //     }
+      //   })
+      // })
+      // setBrands(brands_data)
 
-      setParts(_parts)
+      // setParts(_parts)
 
-      setYear(_years[0])
-      setYears(_years)
+      setYear(init_year)
       setLoading(false)
     })
   }, [])
@@ -62,50 +70,69 @@ const ProfitDashboard = (props) => {
     M.AutoInit()
   })
 
-  useEffect(() => {
-    if(years.length > 0) {
-      var q = parts[year]
-      var trs = q._elements.map((p, idx) => {
-        return (
-          <tr key={idx}>
-            <td>{p.cnt}</td>
-            <td>{p.part.number}</td>
-            <td>{p.part.order}</td>
-            <td>{p.part.name}</td>
-            <td>{p.part.carType}</td>
-            <td>{p.part.unit}</td>
-            <td>{p.part.quantity}</td>
-            <td>{p.part.importPrice ? p.part.importPrice.toFixed(2) : p.part.importPrice}</td>
-            <td>{p.part.salePrice ? p.part.salePrice.toFixed(2) : p.part.salePrice}</td>
-          </tr>
-        )
-      })
-      var parts_conent =
-      <table>
-        <thead>
-          <tr>
-            <th>销量</th>
-            <th>库次</th>
-            <th>编号</th>
-            <th>配件名</th>
-            <th>车型</th>
-            <th>量位</th>
-            <th>数量</th>
-            <th>进货价(元)</th>
-            <th>默认售价(元)</th>
-          </tr>
-        </thead>
+  // useEffect(() => {
+  //   if(years.length > 0) {
+  //     var q = parts[year]
+  //     var trs = q._elements.map((p, idx) => {
+  //       return (
+  //         <tr key={idx}>
+  //           <td>{p.cnt}</td>
+  //           <td>{p.part.number}</td>
+  //           <td>{p.part.order}</td>
+  //           <td>{p.part.name}</td>
+  //           <td>{p.part.carType}</td>
+  //           <td>{p.part.unit}</td>
+  //           <td>{p.part.quantity}</td>
+  //           <td>{p.part.importPrice ? p.part.importPrice.toFixed(2) : p.part.importPrice}</td>
+  //           <td>{p.part.salePrice ? p.part.salePrice.toFixed(2) : p.part.salePrice}</td>
+  //         </tr>
+  //       )
+  //     })
+  //     var parts_conent =
+  //     <table>
+  //       <thead>
+  //         <tr>
+  //           <th>销量</th>
+  //           <th>库次</th>
+  //           <th>编号</th>
+  //           <th>配件名</th>
+  //           <th>车型</th>
+  //           <th>量位</th>
+  //           <th>数量</th>
+  //           <th>进货价(元)</th>
+  //           <th>默认售价(元)</th>
+  //         </tr>
+  //       </thead>
     
-        <tbody>
-          {trs}
-        </tbody>
-      </table>
-      setTable(parts_conent)
-    }
-  }, [years, year])
+  //       <tbody>
+  //         {trs}
+  //       </tbody>
+  //     </table>
+  //     setTable(parts_conent)
+  //   }
+  // }, [years, year])
 
   const selectYear = (e) => {
     setYear(e.target.value)
+    setLoading(true)
+    var y = e.target.value
+    findOrders({'date': { $gt: `${y}` }}, (err, orders) => {
+      if(err) setLoading(true)
+      let { _profit } = stats(orders)
+      let data = {}
+      let months = Object.keys(_profit[y])
+      let year_sum = 0
+      data[y] = months.map(m => {
+        year_sum += _profit[y][m]
+        return {
+          "月份": `${m}月份`,
+          "利润": _profit[y][m],
+        }
+      })
+      data['sum'] = year_sum
+      setProfit(data)
+      setLoading(false)
+    })
   }
 
   const options = years.length > 0 ? years.map((y, idx) => {
@@ -136,6 +163,8 @@ const ProfitDashboard = (props) => {
           </div>
           <div style={{height: "500px"}}>
             <h4>销售利润</h4>
+            <br/>
+            <h5>{year}年总利润{profit['sum'].toFixed(2)}元</h5>
             <ResponsiveBar
               data={profit[`${year}`]}
               keys={['利润']}
@@ -228,7 +257,7 @@ const ProfitDashboard = (props) => {
               motionDamping={15}
             />
           </div>
-          <br/>
+          {/* <br/>
           <div style={{height: "500px"}}>
             <h4>品牌销量</h4>
             <ResponsivePie
@@ -297,7 +326,7 @@ const ProfitDashboard = (props) => {
           </div>
           <br/>
           <h4>卖的最好的10件配件</h4>
-          {tableContent}
+          {tableContent} */}
           <br/>
       </div>
       }

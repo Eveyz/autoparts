@@ -123,6 +123,7 @@ class Order extends React.Component {
       })
 
     })
+
     updateOrder(this.props.match.params._id, { 
       parts: _parts,
       profit: _profit,

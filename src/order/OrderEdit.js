@@ -38,11 +38,14 @@ const OrderEdit = (props) => {
     _order.parts = parts
 
     let profit = 0
+    let sum = 0
     _order.parts.forEach(p => {
       if(diff[p._id]) decreasePartQuantity(p._id, diff[p._id])
       profit += (p.cartSalePrice - p.importPrice) * p.cartQuantity
+      sum += p.cartSalePrice * p.cartQuantity
     })
     _order.profit = profit
+    _order.amount = sum
 
     updateOrder(props.match.params._id, _order, (err, num) => {
       props.history.replace(`/orders/${props.match.params._id}`)

@@ -42,68 +42,67 @@ export const stats = (list) => {
       orders = {},
       brands = {}
   list.forEach((item) => {
-    var d1 = new Date(item.time),
-        m = d1.getMonth() + 1,
-        y = d1.getFullYear();
-    // let times = item.date.split(".")
-    // let y = times[0]
-    // let m = times[1]
+    if(!item.cancel) {
+      var d1 = new Date(item.time),
+          m = d1.getMonth() + 1,
+          y = d1.getFullYear();
 
-    // profit
-    if(profit[y]) {
-      if(profit[y][m]) profit[y][m] = profit[y][m] + item.profit
-      else profit[y][m] = item.profit
-    } else {
-      profit[y] = {}
-      profit[y][m] = item.profit
+      // profit
+      if(profit[y]) {
+        if(profit[y][m]) profit[y][m] = profit[y][m] + item.profit
+        else profit[y][m] = item.profit
+      } else {
+        profit[y] = {}
+        profit[y][m] = item.profit
+      }
     }
 
     // orders
     // let current_year = new Date().getFullYear()
-    orders[y] ? orders[y] = orders[y] + 1 : orders[y] = 1
+    // orders[y] ? orders[y] = orders[y] + 1 : orders[y] = 1
     // end orders
 
-    if(item.parts && item.parts.length > 0) {
-      item.parts.forEach((p, idx) => {
-        // brands
-        if(brands[y]) {
-          if(brands[y][brandChinese[p.brand]]) brands[y][brandChinese[p.brand]] = brands[y][brandChinese[p.brand]] + 1
-          else brands[y][brandChinese[p.brand]] = 1
-        } else {
-          brands[y] = {}
-          brands[y][brandChinese[p.brand]] = 1
-        }
+    // if(item.parts && item.parts.length > 0) {
+    //   item.parts.forEach((p, idx) => {
+    //     // brands
+    //     if(brands[y]) {
+    //       if(brands[y][brandChinese[p.brand]]) brands[y][brandChinese[p.brand]] = brands[y][brandChinese[p.brand]] + 1
+    //       else brands[y][brandChinese[p.brand]] = 1
+    //     } else {
+    //       brands[y] = {}
+    //       brands[y][brandChinese[p.brand]] = 1
+    //     }
 
-        // parts
-        if(parts[y]) {
-          if(parts[y][p._id]) parts[y][p._id]["cnt"] = parts[y][p._id]["cnt"] + 1
-          else parts[y][p._id] = { "cnt": 1, part: p }
-        } else {
-          parts[y] = {}
-          parts[y][p._id] = { "cnt": 1, part: p }
-        }
+    //     // parts
+    //     if(parts[y]) {
+    //       if(parts[y][p._id]) parts[y][p._id]["cnt"] = parts[y][p._id]["cnt"] + 1
+    //       else parts[y][p._id] = { "cnt": 1, part: p }
+    //     } else {
+    //       parts[y] = {}
+    //       parts[y][p._id] = { "cnt": 1, part: p }
+    //     }
         
         
-      })
-    }
+    //   })
+    // }
   })
-  Object.keys(parts).forEach(year => {
-    var queue = new PriorityQueue((a, b) => {
-      return b.cnt - a.cnt
-    })
-    for (const id in parts[year]) {
-      queue.enq(parts[year][id])
-      if(queue.size() > 10) {
-        queue.deq()
-      }
-    }
-    parts[year] = queue
-  })
+  // Object.keys(parts).forEach(year => {
+  //   var queue = new PriorityQueue((a, b) => {
+  //     return b.cnt - a.cnt
+  //   })
+  //   for (const id in parts[year]) {
+  //     queue.enq(parts[year][id])
+  //     if(queue.size() > 10) {
+  //       queue.deq()
+  //     }
+  //   }
+  //   parts[year] = queue
+  // })
   return {
     "_profit": profit,
-    "_parts": parts,
-    "_orders": orders,
-    "_brands": brands,
+    // "_parts": parts,
+    // "_orders": orders,
+    // "_brands": brands,
   }
 }
 
@@ -146,7 +145,24 @@ export const generateOrderNum = (num) => {
   return res
 }
 
-export const toRMBWords = (_amount) => {
+export const toRMBWords = (n) => {
+  if (!/^(0|[1-9]\d*)(\.\d+)?$/.test(n)){
+    return "数据非法";  //判断数据是否大于0
+  }
+  var unit = "千百拾亿千百拾万千百拾元角分", str = "";
+  n += "00";  
+  var indexpoint = n.indexOf('.');  // 如果是小数，截取小数点前面的位数
+  if (indexpoint >= 0){
+    n = n.substring(0, indexpoint) + n.substr(indexpoint+1, 2);   // 若为小数，截取需要使用的unit单位
+  }
+  unit = unit.substr(unit.length - n.length);  // 若为整数，截取需要使用的unit单位
+  for (var i=0; i < n.length; i++){
+    str += "零壹贰叁肆伍陆柒捌玖".charAt(n.charAt(i)) + unit.charAt(i);  //遍历转化为大写的数字
+  }
+  return str.replace(/零(千|百|拾|角)/g, "零").replace(/(零)+/g, "零").replace(/零(万|亿|元)/g, "$1").replace(/(亿)万|壹(拾)/g, "$1$2").replace(/^元零?|零分/g, "").replace(/元$/g, "元整"); // 替换掉数字里面的零字符，得到结果
+}
+
+export const toRMBWordsB = (_amount) => {
   var amount = parseFloat(_amount).toFixed(2)
   var res = "元"
   var map = {
@@ -191,4 +207,14 @@ export const toRMBWords = (_amount) => {
     }
   }
   return res
+}
+
+export const yearToCurrent = () => {
+  let _years = []
+  let _year = new Date().getFullYear()
+  while(_year >= 2019) {
+    _years.push(_year)
+    _year -= 1
+  }
+  return _years
 }

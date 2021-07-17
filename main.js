@@ -19,12 +19,14 @@ _db.orders = new Datastore({ filename: path.join(app.getPath("userData"), "order
 _db.logs = new Datastore({ filename: path.join(app.getPath("userData"), "logs.db"), autoload: true })
 _db.companies = new Datastore({ filename: path.join(app.getPath("userData"), "companies.db"), autoload: true })
 _db.counts = new Datastore({ filename: path.join(app.getPath("userData"), "counts.db"), autoload: true })
+_db.profit = new Datastore({ filename: path.join(app.getPath("userData"), "profit.db"), autoload: true })
 
 // _db.users.loadDatabase()
 // _db.parts.loadDatabase()
 
 _db.parts.ensureIndex({ fieldName: 'brand' })
 _db.orders.ensureIndex({ fieldName: 'time' })
+_db.orders.ensureIndex({ fieldName: 'year' })
 
 const {
   GET_STORE,
