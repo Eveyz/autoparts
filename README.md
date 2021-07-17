@@ -6,6 +6,9 @@ Dev:
 npm run start
 npm run electron-dev
 
+Prod
+npm run build-react
+npm run build
 
 Mac
 app.getpath: /Users/znz/Library/Application Support/autoparts
