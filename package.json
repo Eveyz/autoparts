@@ -2,6 +2,7 @@
   "name": "autoparts",
   "version": "0.1.0",
   "private": true,
+  "author": "ZNZ",
   "dependencies": {
     "@nivo/bar": "^0.62.0",
     "@nivo/pie": "^0.62.0",
@@ -15,7 +16,7 @@
   "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
-    "build-react": "react-scripts build",
+    "react-build": "react-scripts build",
     "build": "electron-packager . Autoparts --overwrite --platform=win32 --arch=ia32 --prune=true --asar",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -8,7 +8,12 @@ npm run electron-dev
 
 Prod
 npm run build-react
-npm run build
+npm run electron-build
+
+Note:
+Make sure to install wine on mac
+
+
 
 Mac
 app.getpath: /Users/znz/Library/Application Support/autoparts
