@@ -35,7 +35,7 @@
   "devDependencies": {
     "bcrypt": "^5.0.1",
     "cross-env": "^5.2.1",
-    "electron": "^4.2.12",
+    "electron": "^15.5.5",
     "electron-packager": "^13.1.1",
     "formik": "^1.5.8",
     "materialize-css": "^1.0.0",
